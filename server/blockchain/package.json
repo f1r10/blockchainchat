@@ -1,0 +1,13 @@
+{
+  "name": "chat-blockchain",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "hardhat node --hostname 0.0.0.0",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js --network localhost"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.29.1"
+  }
+}

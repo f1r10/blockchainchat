@@ -1,0 +1,13 @@
+# Rust
+target/
+**/*.rs.bk
+
+# Node.js
+node_modules/
+.env
+
+# Flutter
+client/.dart_tool/
+client/build/
+client/.flutter-plugins
+client/.flutter-plugins-dependencies

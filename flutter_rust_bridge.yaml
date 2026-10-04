@@ -1,0 +1,20 @@
+# flutter_rust_bridge v2 codegen configuration
+# Run: flutter_rust_bridge_codegen generate  (from workspace root)
+
+rust_input:
+  - crate_path: core
+    # Expose only the three public API modules
+    extra_headers: |
+      pub use blockchainchat_core::api::identity::*;
+      pub use blockchainchat_core::api::messaging::*;
+      pub use blockchainchat_core::api::sync::*;
+
+dart_output:
+  path: client/lib/src/rust
+  dart_enums_style: true
+
+c_output_path: client/ios/Runner/bridge_generated.h
+
+# Build the Rust crate as a dynamic library
+# flutter_rust_bridge_codegen will call `cargo build` internally
+rust_crate_dir: core

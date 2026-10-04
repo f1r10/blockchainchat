@@ -1,0 +1,353 @@
+{
+  "contractAddress": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+  "chainId": 31337,
+  "deployedAt": "2026-10-02T23:04:47.539Z",
+  "network": "localhost",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "endpoint",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "pubkey",
+          "type": "bytes32"
+        }
+      ],
+      "name": "MailboxRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "endpoint",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "pubkey",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RelayRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "usernameHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "newPrekeyBundle",
+          "type": "bytes32"
+        }
+      ],
+      "name": "UserPrekeyRotated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "usernameHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "commitment",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "prekeyBundle",
+          "type": "bytes32"
+        }
+      ],
+      "name": "UserRegistered",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "getMailboxes",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "endpoint",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "pubkey",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "registeredAt",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "exists",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct NodeAndUserRegistry.NodeInfo[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRelays",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "endpoint",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "pubkey",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint256",
+              "name": "registeredAt",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "exists",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct NodeAndUserRegistry.NodeInfo[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "usernameHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getUser",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "commitment",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "prekeyBundle",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "registeredAt",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "usernameHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "isUserRegistered",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "mailboxes",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "endpoint",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "pubkey",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "registeredAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "exists",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "endpoint",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "pubkey",
+          "type": "bytes32"
+        }
+      ],
+      "name": "registerMailbox",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "endpoint",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "pubkey",
+          "type": "bytes32"
+        }
+      ],
+      "name": "registerRelay",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "usernameHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "commitment",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "prekeyBundle",
+          "type": "bytes32"
+        }
+      ],
+      "name": "registerUser",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "relays",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "endpoint",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "pubkey",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "registeredAt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "exists",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "usernameHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "newPrekeyBundle",
+          "type": "bytes32"
+        }
+      ],
+      "name": "rotatePrekey",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}

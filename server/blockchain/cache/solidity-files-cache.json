@@ -1,0 +1,113 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "C:\\Users\\User\\Desktop\\blochchainchat\\server\\blockchain\\contracts\\NodeAndUserRegistry.sol": {
+      "lastModificationDate": 1790974939702,
+      "contentHash": "463553e67118df5ec5ecf1a2d6582317",
+      "sourceName": "contracts/NodeAndUserRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.24"
+      ],
+      "artifacts": [
+        "NodeAndUserRegistry"
+      ]
+    },
+    "C:\\Users\\User\\Desktop\\blochchainchat\\server\\blockchain\\contracts\\UsernameRegistry.sol": {
+      "lastModificationDate": 1790973938533,
+      "contentHash": "594477b7b2b7ed0033a2c6377e65d12f",
+      "sourceName": "contracts/UsernameRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.24"
+      ],
+      "artifacts": [
+        "UsernameRegistry"
+      ]
+    },
+    "C:\\Users\\User\\Desktop\\blochchainchat\\server\\blockchain\\contracts\\CommitmentRegistry.sol": {
+      "lastModificationDate": 1790981641446,
+      "contentHash": "5d7596dd53d9a042404802f0b653dc87",
+      "sourceName": "contracts/CommitmentRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.24"
+      ],
+      "artifacts": [
+        "CommitmentRegistry"
+      ]
+    }
+  }
+}

@@ -1,0 +1,226 @@
+networks:
+  chatnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+
+volumes:
+  blockchain_data:
+  mailbox1_data:
+  mailbox2_data:
+  mailbox3_data:
+  mailbox4_data:
+  mailbox5_data:
+
+services:
+  # ─────────────────────────────────────────────
+  # LOCAL BLOCKCHAIN (Hardhat)
+  # ─────────────────────────────────────────────
+  blockchain:
+    build: ./server/blockchain
+    container_name: chat_blockchain
+    ports:
+      - "8545:8545"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.10
+    volumes:
+      - blockchain_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8545"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─────────────────────────────────────────────
+  # DISCOVERY SERVER
+  # ─────────────────────────────────────────────
+  discovery:
+    build: ./server/discovery
+    container_name: chat_discovery
+    ports:
+      - "5000:5000"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.20
+    environment:
+      - BLOCKCHAIN_RPC=http://blockchain:8545
+      - NODE_ENV=development
+    depends_on:
+      blockchain:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ─────────────────────────────────────────────
+  # RELAY / MIX NODES (3 adet)
+  # ─────────────────────────────────────────────
+  relay1:
+    build: ./server/relay
+    container_name: chat_relay1
+    ports:
+      - "3001:3000"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.31
+    environment:
+      - NODE_ID=relay1
+      - NODE_PORT=3000
+      - DISCOVERY_URL=http://discovery:5000
+      - NEXT_HOPS=http://relay2:3000,http://relay3:3000
+    depends_on:
+      - discovery
+    restart: unless-stopped
+
+  relay2:
+    build: ./server/relay
+    container_name: chat_relay2
+    ports:
+      - "3002:3000"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.32
+    environment:
+      - NODE_ID=relay2
+      - NODE_PORT=3000
+      - DISCOVERY_URL=http://discovery:5000
+      - NEXT_HOPS=http://relay1:3000,http://relay3:3000
+    depends_on:
+      - discovery
+    restart: unless-stopped
+
+  relay3:
+    build: ./server/relay
+    container_name: chat_relay3
+    ports:
+      - "3003:3000"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.33
+    environment:
+      - NODE_ID=relay3
+      - NODE_PORT=3000
+      - DISCOVERY_URL=http://discovery:5000
+      - NEXT_HOPS=http://relay1:3000,http://relay2:3000
+    depends_on:
+      - discovery
+    restart: unless-stopped
+
+  # ─────────────────────────────────────────────
+  # MAILBOX NODES (5 adet - 3-of-5 üçün)
+  # ─────────────────────────────────────────────
+  mailbox1:
+    build: ./server/mailbox
+    container_name: chat_mailbox1
+    ports:
+      - "4001:4000"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.41
+    environment:
+      - MAILBOX_ID=mailbox1
+      - MAILBOX_PORT=4000
+      - DISCOVERY_URL=http://discovery:5000
+    volumes:
+      - mailbox1_data:/app/data
+    depends_on:
+      - discovery
+    restart: unless-stopped
+
+  mailbox2:
+    build: ./server/mailbox
+    container_name: chat_mailbox2
+    ports:
+      - "4002:4000"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.42
+    environment:
+      - MAILBOX_ID=mailbox2
+      - MAILBOX_PORT=4000
+      - DISCOVERY_URL=http://discovery:5000
+    volumes:
+      - mailbox2_data:/app/data
+    depends_on:
+      - discovery
+    restart: unless-stopped
+
+  mailbox3:
+    build: ./server/mailbox
+    container_name: chat_mailbox3
+    ports:
+      - "4003:4000"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.43
+    environment:
+      - MAILBOX_ID=mailbox3
+      - MAILBOX_PORT=4000
+      - DISCOVERY_URL=http://discovery:5000
+    volumes:
+      - mailbox3_data:/app/data
+    depends_on:
+      - discovery
+    restart: unless-stopped
+
+  mailbox4:
+    build: ./server/mailbox
+    container_name: chat_mailbox4
+    ports:
+      - "4004:4000"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.44
+    environment:
+      - MAILBOX_ID=mailbox4
+      - MAILBOX_PORT=4000
+      - DISCOVERY_URL=http://discovery:5000
+    volumes:
+      - mailbox4_data:/app/data
+    depends_on:
+      - discovery
+    restart: unless-stopped
+
+  mailbox5:
+    build: ./server/mailbox
+    container_name: chat_mailbox5
+    ports:
+      - "4005:4000"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.45
+    environment:
+      - MAILBOX_ID=mailbox5
+      - MAILBOX_PORT=4000
+      - DISCOVERY_URL=http://discovery:5000
+    volumes:
+      - mailbox5_data:/app/data
+    depends_on:
+      - discovery
+    restart: unless-stopped
+
+  # ─────────────────────────────────────────────
+  # NGINX - Flutter Web + API Reverse Proxy
+  # ─────────────────────────────────────────────
+  nginx:
+    build: ./server/nginx
+    container_name: chat_nginx
+    ports:
+      - "80:80"
+    networks:
+      chatnet:
+        ipv4_address: 172.20.0.100
+    depends_on:
+      - discovery
+      - relay1
+      - relay2
+      - relay3
+      - mailbox1
+      - mailbox2
+      - mailbox3
+      - mailbox4
+      - mailbox5
+    restart: unless-stopped
+    volumes:
+      - ./client/build/web:/usr/share/nginx/html:ro

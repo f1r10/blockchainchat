@@ -1,0 +1,13 @@
+{
+  "blockchainRpc": "https://sepolia-rollup.arbitrum.io/rpc",
+  "contractAddress": "0x0000000000000000000000000000000000000000",
+  "chainId": 421614,
+  "pollingIntervalMs": 4000,
+  "version": "0.3.0-arbitrum-sepolia",
+  "dhtBootstrapNodes": [
+    "/ip4/YOUR_VPS_PUBLIC_IP/tcp/4001/p2p/YOUR_VALIDATOR_PEER_ID"
+  ],
+  "nymGateways": [
+    "YOUR_VPS_PUBLIC_IP:9000"
+  ]
+}

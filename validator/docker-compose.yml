@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  validator:
+    build:
+      context: ..
+      dockerfile: validator/Dockerfile
+    container_name: blockchainchat-validator
+    restart: unless-stopped
+    environment:
+      - RUST_LOG=info
+      - MAILBOX_DB_PATH=/data/mailbox_db
+      - DHT_PORT=4001
+      - NYM_PORT=9000
+    ports:
+      # libp2p Kademlia DHT listener
+      - "4001:4001/tcp"
+      - "4001:4001/udp"
+      # Nym Mixnet anonymous chunk receiver (Push/Pull)
+      - "9000:9000/tcp"
+    volumes:
+      - validator_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9000/health || exit 0"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  validator_data:
+    name: blockchainchat_validator_data
+    driver: local

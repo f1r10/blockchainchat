@@ -1,0 +1,29 @@
+[package]
+name = "blockchainchat-validator"
+version = "0.1.0"
+edition = "2021"
+authors = ["Antigravity Engineering"]
+description = "Decentralized Mailbox & DHT Node for zero-metadata messaging network"
+
+[[bin]]
+name = "validator"
+path = "src/main.rs"
+
+[dependencies]
+blockchainchat-core = { path = "../core" }
+tokio = { version = "1.38", features = ["full"] }
+sled = "0.34"
+libp2p = { version = "0.53", features = ["tokio", "gossipsub", "kad", "noise", "tcp", "yamux"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+bincode = "1.3"
+thiserror = "1.0"
+anyhow = "1.0"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+rand = "0.8"
+getrandom = "0.2"
+
+[dev-dependencies]
+tokio-test = "0.4"
+tempfile = "3.8"

@@ -1,0 +1,6 @@
+# Cargo configuration for Windows build toolchain resolution
+# If Visual Studio Build Tools are installed, cargo uses MSVC link.exe automatically.
+# If using MinGW / LLVM, you can target x86_64-pc-windows-gnu.
+
+[target.x86_64-pc-windows-gnu]
+linker = "gcc"

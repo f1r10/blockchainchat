@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "core",
+    "validator"
+]
+resolver = "2"
